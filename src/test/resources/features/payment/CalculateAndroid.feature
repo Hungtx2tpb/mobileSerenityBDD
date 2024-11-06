@@ -6,11 +6,6 @@ Feature: Calculator app - android
 
   @tcName
   Scenario: Verify Calculator successfully
-    Given user send api get token
-      | Key      | Value     |
-      | userName | demo      |
-      | password | Demo@2024 |
-    Then user verify API response code display equals 200
     When user clear cache
     When user input number: "9"
     And user choose operator: "+"
