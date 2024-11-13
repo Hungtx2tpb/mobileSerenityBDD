@@ -11,8 +11,5 @@ public class LoginPage extends BasePage {
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name='Close']")
     WebElementFacade btnClose;
 
-    public void startApplication() {
-    }
-
 
 }

@@ -5,15 +5,15 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import net.serenitybdd.core.pages.WebElementFacade;
 
-public class CalculatePage extends BasePage {
+public class HomePage extends BasePage {
 
-    @AndroidFindBy(id = "cpp_button_division")
+    @AndroidFindBy(xpath = "//android.widget.TextView[contains(@text,'Đơn hàng từng mua')]")
     @iOSXCUITFindBy(xpath = "TBD")
-    WebElementFacade op_div;
+    WebElementFacade lblDonHangTungMua;
 
-    @AndroidFindBy(id = "cpp_button_multiplication")
+    @AndroidFindBy(xpath = "//android.widget.ImageView[@resource-id='tab_Cart']")
     @iOSXCUITFindBy(xpath = "TBD")
-    WebElementFacade op_mul;
+    WebElementFacade btnGioHang;
 
     @AndroidFindBy(id = "cpp_button_subtraction")
     @iOSXCUITFindBy(xpath = "TBD")
@@ -41,36 +41,17 @@ public class CalculatePage extends BasePage {
     WebElementFacade formula;
 
 
-    public void clearCache() {
-        clear.waitUntilClickable().click();
+    public void clickDonHangTungMua() {
+        lblDonHangTungMua.waitUntilClickable().click();
     }
 
-    public void enterNumberIntoField(String number) {
-        formula.sendKeys(number);
+    public void clickButtonGioHang() {
+        btnGioHang.waitUntilClickable().click();
     }
 
-    public void userChooseOperator(String op) {
-        switch (op) {
-            case "+":
-                op_add.waitUntilClickable().click();
-                break;
-            case "-":
-                op_sub.waitUntilClickable().click();
-                break;
-            case "x":
-                op_mul.waitUntilClickable().click();
-                break;
-            case ":":
-                op_div.waitUntilClickable().click();
-                break;
-            case "=":
-                eq.waitUntilClickable().click();
-                break;
-        }
+    public void tapVaoTimKiemTheoToaDo() {
+        waitASeconds(3000);
+        waitUntilElementVisible(15, lblDonHangTungMua);
+        tabOnCoordinate(200, 320);
     }
-
-    public String getResult() {
-        return result.waitUntilVisible().getText();
-    }
-
 }
