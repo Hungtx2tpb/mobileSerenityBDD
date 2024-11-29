@@ -14,7 +14,6 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <serenity.version>2.0.84</serenity.version>
     <serenity.cucumber.version>1.9.45</serenity.cucumber.version>
-    <jars>${project.basedir}/src/test/java/bb/lib</jars>
   </properties>
 
   <dependencies>

@@ -2,7 +2,9 @@ package bb.common;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.TouchAction;
+import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
+import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.touch.TapOptions;
 import io.appium.java_client.touch.WaitOptions;
@@ -63,6 +65,16 @@ public class BasePage extends PageObject {
         double balanceDouble = Double.parseDouble(balance);
         DecimalFormat df = new DecimalFormat("###,###");
         return df.format(balanceDouble);
+    }
+
+    // Sử dụng cho trường hợp excuitest version > 7.24
+    public AppiumDriver getAndroidDriver() {
+        return (AndroidDriver) ((WebDriverFacade) getDriver()).getProxiedDriver();
+    }
+
+    // Sử dụng cho trường hợp excuitest version > 7.24
+    public AppiumDriver getIOSDriver() {
+        return (IOSDriver) ((WebDriverFacade) getDriver()).getProxiedDriver();
     }
 
     public AppiumDriver<AndroidElement> mobileDriver() {

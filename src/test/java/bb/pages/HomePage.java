@@ -4,6 +4,7 @@ import bb.common.BasePage;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import net.serenitybdd.core.pages.WebElementFacade;
+import org.openqa.selenium.By;
 
 public class HomePage extends BasePage {
 
@@ -42,7 +43,12 @@ public class HomePage extends BasePage {
 
 
     public void clickDonHangTungMua() {
+        waitASeconds(3000);
         lblDonHangTungMua.waitUntilClickable().click();
+//        String xpath = "//android.widget.ImageView[@resource-id='%s']";
+//        String a = String.format(xpath,"a");
+//        $(a).click();
+//        mobileDriver().findElement(By.xpath(a)).click();
     }
 
     public void clickButtonGioHang() {

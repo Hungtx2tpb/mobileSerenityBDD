@@ -4,7 +4,7 @@ Feature: Don hang tung mua - android
   Background: Device opens app on Android
     Given user opens app
 
-  @tcName
+  @tcName-1
   Scenario: Kiem tra bat buoc nhap so dien thoai trong don hang tung mua
     When user click vao don hang tung mua
     And user click button tiep tuc

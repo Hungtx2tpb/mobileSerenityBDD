@@ -1,0 +1,8 @@
+
+Run
+mvn clean verify -Dcucumber.options="--tags @tcName-1 --tags ~@NOT_READY"
+
+C1: Rerun
+mvn clean verify -Dcucumber.options=“@rerun/serenity-reports/rerun.txt"
+C2: Rerun
+mvn clean verify -Dcucumber.options="--tags @tcName-1" -Dfailsafe.rerunFailingTestsCount=2
