@@ -86,7 +86,7 @@ public class BasePage extends PageObject {
                 .release()
                 .perform();
     }
-
+//aaaaa
     public void scrollDownByActionCustomIos() {
         if (screenSize == null) {
             screenSize = getDriver().manage().window().getSize();
