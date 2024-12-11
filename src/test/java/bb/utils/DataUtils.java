@@ -15,10 +15,17 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+
+
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 
 public class DataUtils {
     public static final String PATH_RESOURCE;
@@ -126,6 +133,47 @@ public class DataUtils {
             var4.printStackTrace();
             return null;
         }
+    }
+
+    public static HashMap<String, String> getCredentialsByRole(String filePath, String role) {
+        HashMap<String, String> credentials = new HashMap<>();
+        File file = new File(filePath);
+
+        if (!file.exists()) {
+            System.out.println("File không tồn tại tại đường dẫn: " + filePath);
+            return credentials;
+        }
+
+        try (FileInputStream fileInputStream = new FileInputStream(file);
+             Workbook workbook = new XSSFWorkbook(fileInputStream)) {
+
+            Sheet sheet = workbook.getSheetAt(0); // Lấy sheet đầu tiên
+
+            // Duyệt qua các dòng trong sheet
+            for (Row row : sheet) {
+                Cell roleCell = row.getCell(0); // Cột "Type of role"
+
+                if (roleCell != null && roleCell.getCellType() == CellType.STRING
+                        && roleCell.getStringCellValue().trim().equals(role.trim())) {
+
+                    // Đọc giá trị của username và password
+                    Cell usernameCell = row.getCell(1);
+                    Cell passwordCell = row.getCell(2);
+
+                    String username = usernameCell != null ? usernameCell.toString().trim() : "";
+                    String password = passwordCell != null ? passwordCell.toString().trim() : "";
+
+                    // Thêm vào HashMap
+                    credentials.put("username", username);
+                    credentials.put("password", password);
+                    break; // Thoát vòng lặp khi tìm thấy
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return credentials;
     }
 
     static {

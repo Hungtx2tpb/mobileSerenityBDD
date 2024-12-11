@@ -20,6 +20,8 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -35,9 +37,7 @@ import static java.time.Duration.ofMillis;
 public class BasePage extends PageObject {
 
     private Dimension screenSize;
-
-    public void startApplication() {
-    }
+    private static final Logger logger = LoggerFactory.getLogger(BasePage.class);
 
     public void closeAppThenReopen() {
         mobileDriver().launchApp();
@@ -155,6 +155,14 @@ public class BasePage extends PageObject {
                 .perform();
     }
 
+    public void hideKeyboard() {
+        try {
+            mobileDriver().hideKeyboard();
+        } catch (Exception e) {
+            logger.error("Error while hiding keyboard", e);
+        }
+    }
+
     public void scrollDownByAction(int startX, int startY, int endX, int endY) {
         if (screenSize == null) {
             screenSize = getDriver().manage().window().getSize();
@@ -232,7 +240,6 @@ public class BasePage extends PageObject {
         return isDisplay;
 
     }
-
 
     public void waitUntilElementInvisibleByXpath(int timeoutInSeconds, String xpath) {
         FluentWait<WebDriver> wait = new FluentWait<>(getDriver())

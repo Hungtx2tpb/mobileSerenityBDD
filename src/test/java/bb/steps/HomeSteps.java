@@ -4,24 +4,25 @@ import bb.pages.HomePage;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 public class HomeSteps extends ScenarioSteps {
     HomePage homePage;
 
     @Step
-    public void clickDonHangTungMua() {
-        homePage.clickDonHangTungMua();
+    public void verifyLoginSuccessfully(){
+        assertThat(homePage.verifyLoginSuccessfully()).isTrue();
     }
 
     @Step
-    public void clickButtonGioHang() {
-        homePage.clickButtonGioHang();
+    public void skipPopup(){
+        homePage.skipPopup();
     }
 
     @Step
-    public void tapVaoTimKiemTheoToaDo() {
-        homePage.tapVaoTimKiemTheoToaDo();
+    public void clickOnMoneyTransfer(){
+        homePage.clickOnMoneyTransfer();
     }
-
 
 }
 

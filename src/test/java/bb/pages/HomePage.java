@@ -1,6 +1,7 @@
 package bb.pages;
 
 import bb.common.BasePage;
+import bb.utils.Utilities;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import net.serenitybdd.core.pages.WebElementFacade;
@@ -8,56 +9,51 @@ import org.openqa.selenium.By;
 
 public class HomePage extends BasePage {
 
-    @AndroidFindBy(xpath = "//android.widget.TextView[contains(@text,'Đơn hàng từng mua')]")
-    @iOSXCUITFindBy(xpath = "TBD")
-    WebElementFacade lblDonHangTungMua;
+    @AndroidFindBy(xpath = "//*[@resource-id = 'tpb.bb.hydrobank:id/tv_username']")
+    @iOSXCUITFindBy(xpath = "//...")
+    WebElementFacade txtUsername;
 
-    @AndroidFindBy(xpath = "//android.widget.ImageView[@resource-id='tab_Cart']")
-    @iOSXCUITFindBy(xpath = "TBD")
-    WebElementFacade btnGioHang;
+    @AndroidFindBy(xpath = "//android.widget.ImageView[@resource-id='tpb.bb.hydrobank:id/btn_close']")
+    @iOSXCUITFindBy(xpath = "")
+    WebElementFacade btnClose;
 
-    @AndroidFindBy(id = "cpp_button_subtraction")
-    @iOSXCUITFindBy(xpath = "TBD")
-    WebElementFacade op_sub;
+    @AndroidFindBy(xpath = "//android.widget.ImageView[@resource-id='tpb.bb.hydrobank:id/ic_close_popup']")
+    @iOSXCUITFindBy(xpath = "")
+    WebElementFacade btnIcClose;
 
-    @AndroidFindBy(id = "cpp_button_plus")
-//    @AndroidFindBy(xpath = "//android.widget.Button[@content-desc=\"cộng\"]")
-    @iOSXCUITFindBy(xpath = "TBD")
-    WebElementFacade op_add;
+    @AndroidFindBy(xpath = "//*[@resource-id = 'tpb.bb.hydrobank:id/btnFundTransfer']")
+    @iOSXCUITFindBy(xpath = "")
+    WebElementFacade btnMoneyTransfer;
 
-    @AndroidFindBy(id = "eq")
-    @iOSXCUITFindBy(xpath = "TBD")
-    WebElementFacade eq;
+    public boolean verifyLoginSuccessfully(){
+        waitUntilElementVisible(50, txtUsername);
+        return txtUsername.isDisplayed();
+    }
 
-    @AndroidFindBy(id = "calculator_display")
-    @iOSXCUITFindBy(xpath = "TBD")
-    WebElementFacade result;
+    public void skipPopup(){
+        if(btnClose.waitUntilVisible().isVisible()){
+            btnClose.click();
+        }
+        if (btnIcClose.waitUntilVisible().isVisible()){
+            btnIcClose.click();
+        }
+    }
 
-    @AndroidFindBy(id = "cpp_button_clear")
-    @iOSXCUITFindBy(xpath = "TBD")
-    WebElementFacade clear;
+    public void clickOnMoneyTransfer(){
+        btnMoneyTransfer.waitUntilClickable().click();
 
-    @AndroidFindBy(id = "calculator_editor")
-    @iOSXCUITFindBy(xpath = "TBD")
-    WebElementFacade formula;
+    }
 
 
-    public void clickDonHangTungMua() {
-        waitASeconds(3000);
-        lblDonHangTungMua.waitUntilClickable().click();
+
+
+
+
+//  if(Utilities.isCurrentPlatformAndroid()){
 //        String xpath = "//android.widget.ImageView[@resource-id='%s']";
 //        String a = String.format(xpath,"a");
 //        $(a).click();
 //        mobileDriver().findElement(By.xpath(a)).click();
-    }
+//    }else
 
-    public void clickButtonGioHang() {
-        btnGioHang.waitUntilClickable().click();
-    }
-
-    public void tapVaoTimKiemTheoToaDo() {
-        waitASeconds(3000);
-        waitUntilElementVisible(15, lblDonHangTungMua);
-        tabOnCoordinate(200, 320);
-    }
 }
